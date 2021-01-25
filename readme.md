@@ -1,9 +1,9 @@
-funtion:get the folder size(MB) file num
+funtion:get the folder size(MB) and file num.
 
-1.set the target folder
+1.set the target folder.
 root = 'D:/project/videoFusion/document'
 
-2.set the output excel, the folder must be existing
+2.set the output excel, the folder must be existing.
 savePath = './data/test.xlsx'
 
-3.run
+3.run.
