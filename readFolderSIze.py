@@ -32,12 +32,16 @@ class Folder:
 
     def addFile(self, filePath):
         self.num += 1
-        size = os.path.getsize(filePath)
+        try:
+            size = os.path.getsize(filePath)
+        except Exception as e:
+            print(filePath, " can't size!!!")
+            size = 0
         self.size += size
 
 
-root = 'D:/project/videoFusion/document'
-savePath = './data/test.xlsx'
+root = 'C:/'
+savePath = './data/C20230817Before.xlsx'
 foldersList = []
 foldersList.append(root)
 folderDict = {}
@@ -45,7 +49,12 @@ folder = Folder(root)
 folderDict[root] = folder
 while len(foldersList) > 0:
     tempRootDir = foldersList[0]
-    files = os.listdir(tempRootDir)
+    try:
+        files = os.listdir(tempRootDir)
+    except Exception as e:
+        print(tempRootDir, " can't open!!!!!!!!!!!!!")
+        foldersList.pop(0)
+        continue
     for filename in files:
         if filename == '.' or filename == '..':
             print('continue:', tempRootDir + '/' + filename)
@@ -78,4 +87,5 @@ for key in folderDict:
     i += 1
     if i%100 == 0:
         print('i=', i)
+folderInfo = folderInfo.sort_values(by='size', ascending=False)
 folderInfo.to_excel(savePath, index=False, header=True)
